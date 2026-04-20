@@ -1,10 +1,15 @@
-import { connectDB } from '../config/db.config.js';
 
-export const createUser = async (email, password) => {
-  const db = connectDB();
-  return { id: 1, email, db };
-};
+import mongoose from 'mongoose';
 
-export const findByEmail = async (email) => {
-  return { id: 1, email, message: 'Usuario encontrado en prueba' };
-};
+const userSchema = new mongoose.Schema({
+    nombre: { type: String, required: true },
+    apellido: { type: String, required: true },
+    correo: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
+});
+
+
+const User = mongoose.models.User || mongoose.model('User', userSchema, 'users');
+
+
+export default User;
