@@ -1,14 +1,12 @@
 import express from 'express';
-import { register } from '../controllers/userController.js';
+import { register, loginController, userInfoController } from '../controllers/userController.js';
+import { authMiddleware } from '../middelware/middelware.js';
 
 const router = express.Router();
 
-
-router.post('/login', (req, res) => {
-  res.json({ message: 'Ruta de login funcionando', status: 'ok' });
-});
-
-
+router.post('/login', loginController);
 router.post('/register', register);
+router.post('/info', authMiddleware, userInfoController);
 
 export default router;
+
