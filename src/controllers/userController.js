@@ -10,8 +10,7 @@ export const loginController = async (req, res) => {
     return res.status(result.status).json(result);
 };
 
-
 export const userInfoController = async (req, res) => {
-    const result = await userInfoService();
+    const result = await userInfoService(req.user);
     return res.status(result.status).json(result);
 };
